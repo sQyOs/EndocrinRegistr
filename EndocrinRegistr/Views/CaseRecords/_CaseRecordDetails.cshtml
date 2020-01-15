@@ -1,0 +1,297 @@
+﻿@model EndocrinRegistr.Models.CaseRecord
+
+
+<div class="row">
+    <div class="col-md-12">
+        <fieldset class="border p-2 pl-2 pb-0 mb-4">
+            <legend>Данные пациента:</legend>
+            <div class="row">
+                <dl class="col-sm-5">
+                    <dt>@Html.DisplayNameFor(model => model.Fio)</dt>
+                    <dd>@Html.DisplayFor(model => model.Fio)</dd>
+                </dl>
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateBirth)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DateBirth)
+                    </dd>
+                </dl>
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Sex)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Sex)
+                    </dd>
+                </dl>
+            </div>
+            <div class="row">
+                <dl class="col-sm-4">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Contacts)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Contacts)
+                    </dd>
+                </dl>
+                <dl class="col-sm-4">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Adds)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Adds)
+                    </dd>
+                </dl>
+                <dl class="col-sm-4">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Job)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Job)
+                    </dd>
+                </dl>
+            </div>
+        </fieldset>
+        <div class="row">
+            <dl class="col-sm-4">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Doctors)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Doctors.Doctor)
+                </dd>
+            </dl>
+            <dl class="col-sm-2">
+                <dt>
+                    @Html.DisplayNameFor(model => model.NumCase)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NumCase)
+                </dd>
+            </dl>
+        </div>
+
+        <div class="row">
+            <dl class="col-sm-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DetectCaseY)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DetectCaseY)
+                </dd>
+            </dl>
+            <dl class="col-sm-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DetectFormationY)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DetectFormationY)
+                </dd>
+            </dl>
+            <dl class="col-sm-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DetectDetails)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DetectDetails)
+                </dd>
+            </dl>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Diag)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Diag.NameDiag)
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CompDiag)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CompDiag)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Complaints)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Complaints)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <dl class="col-sm-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Obesity)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Obesity)
+                </dd>
+            </dl>
+            <dl class="col-sm-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DisorderCarbo)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DisorderCarbo)
+                </dd>
+            </dl>
+            <dl class="col-sm-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ArterHypert)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ArterHypert)
+                </dd>
+            </dl>
+            <dl class="col-sm-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DisorderPcm)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DisorderPcm)
+                </dd>
+            </dl>
+        </div>
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Visual)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Visual)
+            </dd>
+        </dl>
+        <div>
+
+
+            <div id="labCase">
+                <input type="hidden" id="labCaseId" value="0" />
+                <table class="table table-condensed table-striped table-bordered text-center table-hover" width="100%">
+                    <thead>
+                        <tr>
+                            <th style="white-space: nowrap; width: 1%;">
+                                Лабораторное исследование
+                            </th>
+                            <th style="white-space: nowrap; width: 1%;">
+                                Год исследования
+                            </th>
+                            <th>
+                                Комментарий
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LabCases)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Lab.LabName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DetectYear)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Comment)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Igh)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Igh)
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Operation)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Operation)
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Postoper)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Postoper)
+            </dd>
+        </dl>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>СВЗК</th>
+                    <th>Место забора крови</th>
+                    <th>Альдостерон пг/мл</th>
+                    <th>Кортизол нмоль/л</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Нижняя полая вена ниже почечных вен (НПВ(а))</td>
+                    <td>
+                        @Html.DisplayFor(model => model.SvzkNpvaA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.SvzkNpvaK)
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Правая надпочечная вена (ПНВ)</td>
+                    <td>
+                        @Html.DisplayFor(model => model.SvzkPnvA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.SvzkPnvK)
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Левая надпочечная вена (ЛНВ)</td>
+                    <td>
+                        @Html.DisplayFor(model => model.SvzkLnvA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.SvzkLnvK)
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Нижняя полая вена выше почечных вен (НПВ(б))</td>
+                    <td>
+                        @Html.DisplayFor(model => model.SvzkNpvbA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.SvzkNpvbK)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="buttons">
+    <a asp-action="Edit" asp-route-id="@Model.CaseRecordId">Редактировать</a> | <a asp-action="Delete" asp-route-id="@Model.CaseRecordId">Удалить</a>
+</div>

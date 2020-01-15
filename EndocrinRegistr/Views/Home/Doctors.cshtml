@@ -1,0 +1,184 @@
+﻿@{
+    ViewData["Title"] = "Doctors";
+}
+
+<h1>Врачи</h1>
+
+<form name="doctorForm" id="doctorForm">
+    <input type="hidden" name="id" value="0" />
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="text" autocapitalize="word" size="50" class="form-control m-2 text-capitalize" name="name" placeholder="Введите ФИО врача..." />
+        </div>
+        <div class="form-group m-2">
+            <a id="save" class="btn btn-sm btn-primary m-1 text-white">Добавить</a>
+            <a id="reset" hidden class="btn btn-sm btn-primary m-1 text-white">Отменить</a>
+        </div>
+    </div>
+</form>
+<br />
+<div id="objTable">
+    <table class="table table-condensed table-striped">
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+
+<script>
+    // Получение всех
+    function GetDoctors() {
+        $.ajax({
+            url: '/api/APIDoctors',
+            type: 'GET',
+            contentType: "application/json",
+            success: function (objs) {
+                let rows = "";
+                $.each(objs, function (index, obj) {
+                    // добавляем полученные элементы в таблицу
+                    rows += row(obj);
+                })
+                $("#objTable table tbody").append(rows);
+            }
+        });
+    }
+    // Получение одного
+    function GetDoctor(idObj) {
+        $.ajax({
+            url: '/api/APIDoctors/' + idObj,
+            type: 'GET',
+            contentType: "application/json",
+            success: function (obj) {
+                let form = document.forms["doctorForm"];
+                form.elements["id"].value = obj.doctorId;
+                form.elements["name"].value = obj.doctor;
+                document.getElementById('save').innerText = "Сохранить";
+                document.getElementById('reset').hidden = false;
+            }
+        });
+    }
+    // Добавление
+    function CreateDoctor(nameObj) {
+        $.ajax({
+            url: "/api/APIDoctors",
+            contentType: "application/json",
+
+            method: "POST",
+            data: JSON.stringify({
+                doctor: nameObj
+            }),
+            success: function (obj) {
+                reset();
+                $("#objTable table tbody").append(row(obj));
+            }
+        })
+    }
+    // Изменение
+    function EditDoctor(idObj, nameObj) {
+
+        $.ajax({
+            url: "/api/APIDoctors/" + idObj,
+            contentType: "application/json",
+            method: "PUT",
+            data: JSON.stringify({
+                doctorId: parseInt(idObj, 10),
+                doctor: nameObj
+            }),
+            success: function (obj) {
+                reset();
+                $("#objTable tr[data-rowid='" + obj.doctorId + "']").replaceWith(row(obj));
+            }
+        })
+    }
+
+    // сброс формы
+    function reset() {
+        let form = document.forms["doctorForm"];
+        form.reset();
+        document.getElementById('save').innerText = "Добавить"
+        document.getElementById('reset').hidden = true;
+        form.elements["id"].value = 0;
+    }
+
+    // Псевдо удаление
+    function DeleteDoctor(idObj) {
+        $.ajax({
+            url: "/api/APIDoctors/" + idObj,
+            contentType: "application/json",
+            method: "PUT",
+            data: JSON.stringify({
+                doctorId: parseInt(idObj, 10),
+                doctor: "deleted",
+                deleted: true
+            }),
+            success: function (obj) {
+                $("#objTable tr[data-rowid='" + obj.doctorId + "']").remove();
+                reset();
+            }
+        })
+    }
+
+    // создание строки для таблицы
+    let row = function (obj) {
+        return "<tr data-rowid='" + obj.doctorId + "'>" +
+            "<td>" + obj.doctor + "</td>" +
+            "<td><a class='editLink btn btn-sm btn-primary text-white' data-id='" + obj.doctorId + "'>Изменить</a> | " +
+            "<a class='removeLink btn btn-sm btn-primary text-white' data-id='" + obj.doctorId + "'>Удалить</a></td></tr>";
+    }
+    // сброс значений формы
+    $("#reset").click(function (e) {
+
+        e.preventDefault();
+        reset();
+    })
+
+    // отправка формы
+    $("#save").click(function (e) {
+        e.preventDefault();
+        let form = document.forms["doctorForm"];
+        let id = form.elements["id"].value;
+        let name = cap(form.elements["name"].value);
+        if (id == 0)
+            CreateDoctor(name);
+        else
+            EditDoctor(id, name);
+    });
+
+    // нажимаем на ссылку Изменить
+    $("body").on("click", ".editLink", function () {
+        let id = $(this).data("id");
+        GetDoctor(id);
+    })
+    // нажимаем на ссылку Удалить
+    $("body").on("click", ".removeLink", function () {
+        let isConfirm = confirm("Подтвердите удаление");
+        if (isConfirm) {
+            let idObj = $(this).data("id");
+            DeleteDoctor(idObj);
+        }
+        
+    })
+    $('#doctorForm').on('keyup keypress', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+    function cap(str) {
+        //return s[0].toUpperCase() + s.slice(1);
+        //return `${str[0].toUpperCase()}${str.slice(1)}`;
+        {
+            let pieces = str.split(" ");
+            for (let i = 0; i < pieces.length; i++) {
+                let j = pieces[i].charAt(0).toUpperCase();
+                pieces[i] = j + pieces[i].substr(1);
+            }
+            return pieces.join(" ");
+        }
+    }
+    // загрузка
+    GetDoctors();
+
+</script>

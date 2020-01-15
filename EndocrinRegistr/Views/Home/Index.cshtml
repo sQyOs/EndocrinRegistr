@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+@*<div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <input class="form-control" type="text" id="search_field" value="" placeholder="Поиск..." />
+            </div>
+            <br />
+            <div class="row"><div class="col-md-3" id="jstree"></div></div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-primary text-white" asp-controller="CaseRecords" asp-action="Edit">Новый пациент</a>
+                </div>
+                <div class="col-md-6">
+                    <a hidden class="btn btn-primary text-white" id="editCaseRecord">Редактировать</a>
+                </div>
+            </div>
+            <div class="row" id="caseR">
+
+            </div>
+        </div>
+    </div>*@
+
+<table width="100%">
+    <thead>
+        <tr>
+            <th width="25%">
+                <input class="form-control" type="text" id="search_field" value="" placeholder="Поиск..." />
+            </th>
+            <th width="5%">&nbsp;</th>
+            <th width="65%">
+                <a class="btn btn-primary text-white" asp-controller="CaseRecords" asp-action="Edit">Новый пациент</a>
+                <a hidden class="btn btn-primary text-white" id="editCaseRecord">Редактировать</a>
+                <a hidden class="btn btn-primary text-white" onclick="printObj('caseR')" id="printCaseRecord">Распечатать</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td width="25%" class="align-top"><div id="jstree"></div></td>
+            <td width="5%">&nbsp;</td>
+            <td width="65%"><div id="caseR"></div></td>
+        </tr>
+    </tbody>
+</table>
+@section scripts{
+    @*<link href="~/lib/jstree/themes/default-dark/style.min.css" rel="stylesheet" />*@
+    <link href="~/lib/jstree/themes/default/style.min.css" rel="stylesheet" />
+    <script src="~/lib/jstree/jstree.min.js"></script>
+    <script type="text/javascript">
+        let caseRecordId = 0;
+        $.jstree.defaults.search.show_only_matches = true;
+        $(function () {
+            let to = false;
+            $("#search_field").keyup(function () {
+                if (to) {
+                    clearTimeout(to);
+                }
+                to = setTimeout(function () {
+                    let v = $("#search_field").val();
+                    $("#jstree").jstree(true).search(v);
+                }, 250);
+            });
+            $("#jstree").on("changed.jstree", function (e, data) {
+                //if (data.node.children.length > 0) {
+                //    $('#jstree').jstree(true).deselect_node(data.node);
+                //    $('#jstree').jstree(true).toggle_node(data.node);
+                //}
+                let postedItem = [];
+                if (data.selected.length) {
+                    let id = data.selected[0];
+                    if (id.indexOf("-") != -1) {
+                        id = id.split("-")[1];
+                        caseRecordId = id;
+                    } else {
+                        id = 0;
+                    }
+                    postedItem.push({
+                        id: id
+                    });
+                    // ajax
+                    //alert(id);
+                    $.ajax({
+                    url: "/CaseRecords/Details/" + id,
+                    type: 'GET',
+                    //contentType: "application/json",
+                    //data: JSON.stringify(postedItem)
+                    success: function (caseRecord) {
+                        $("#caseR").html(caseRecord);
+                        $("#editCaseRecord")[0].hidden = false;
+                        $("#printCaseRecord")[0].hidden = false;
+                        }
+                    });
+                }
+                //alert(JSON.stringify(postedItem));
+                $("#selectedItem").val(JSON.stringify(postedItem));
+            }).jstree({
+                "core": {
+                    "multiple": false,
+                    "themes": {
+                        "variant": "large",
+                        "stripes": true
+                    },
+                    "data": @Html.Raw(ViewBag.Json)
+                },
+                "plugins": ["wholerow", "search", "sort"]
+            });
+        });
+
+        $("body").on("click", "#editCaseRecord", function () {
+            window.location.href = "@Url.Action("Edit", "CaseRecords")/" + caseRecordId;
+        })
+        function printObj(objToPrint) {
+            let printContents = document.getElementById(objToPrint).innerHTML;
+            let originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            document.querySelector("#buttons").remove();
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+}

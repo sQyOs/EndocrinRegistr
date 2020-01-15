@@ -1,0 +1,209 @@
+﻿@model IEnumerable<EndocrinRegistr.Models.CaseRecord>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<h1>Index</h1>*@
+
+<p>
+    <a asp-action="Create">Создать нового</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Diag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doctors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.CompDiag)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.NumCase)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DetectCaseY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DetectFormationY)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.DetectDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complaints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Obesity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisorderCarbo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArterHypert)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisorderPcm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Igh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Operation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Postoper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SvzkNpvaA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SvzkPnvA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SvzkLnvA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SvzkNpvbA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SvzkNpvaK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SvzkPnvK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SvzkLnvK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SvzkNpvbK)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diag.NameDiag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctors.Doctor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contacts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.CompDiag)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.NumCase)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DetectCaseY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DetectFormationY)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.DetectDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Complaints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Obesity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisorderCarbo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArterHypert)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisorderPcm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Igh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Operation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postoper)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SvzkNpvaA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SvzkPnvA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SvzkLnvA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SvzkNpvbA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SvzkNpvaK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SvzkPnvK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SvzkLnvK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SvzkNpvbK)
+            </td>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CaseRecordId">Редактировать</a> <br />
+                @*<a asp-action="Details" asp-route-id="@item.CaseRecordId">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.CaseRecordId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

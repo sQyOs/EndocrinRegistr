@@ -1,0 +1,135 @@
+﻿@model EndocrinRegistr.Models.CaseRecord
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Удаление</h1>
+
+<h3>Вы уверены что хотите удалить эту запись? <br />Восстановлению не подлежит!!!</h3>
+<div class="row">
+    <div class="col-md-12">
+        <fieldset class="border p-2 pl-2 pb-0 mb-4">
+            <legend>Данные пациента:</legend>
+            <div class="row">
+                <dl class="col-sm-5">
+                    <dt>@Html.DisplayNameFor(model => model.Fio)</dt>
+                    <dd>@Html.DisplayFor(model => model.Fio)</dd>
+                </dl>
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateBirth)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DateBirth)
+                    </dd>
+                </dl>
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Sex)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Sex)
+                    </dd>
+                </dl>
+            </div>
+            <div class="row">
+                <dl class="col-sm-4">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Contacts)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Contacts)
+                    </dd>
+                </dl>
+                <dl class="col-sm-4">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Adds)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Adds)
+                    </dd>
+                </dl>
+                <dl class="col-sm-4">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Job)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Job)
+                    </dd>
+                </dl>
+            </div>
+        </fieldset>
+        <div class="row">
+            <dl class="col-sm-4">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Doctors)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Doctors.Doctor)
+                </dd>
+            </dl>
+            <dl class="col-sm-2">
+                <dt>
+                    @Html.DisplayNameFor(model => model.NumCase)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NumCase)
+                </dd>
+            </dl>
+        </div>
+
+        <div class="row">
+            <dl class="col-sm-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DetectCaseY)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DetectCaseY)
+                </dd>
+            </dl>
+            <dl class="col-sm-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DetectFormationY)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DetectFormationY)
+                </dd>
+            </dl>
+            <dl class="col-sm-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DetectDetails)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DetectDetails)
+                </dd>
+            </dl>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Diag)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Diag.NameDiag)
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CompDiag)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CompDiag)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CaseRecordId" />
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-controller="Home" asp-action="Index">Вернуться на главную</a>
+    </form>
+</div>

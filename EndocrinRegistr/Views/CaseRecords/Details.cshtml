@@ -1,0 +1,529 @@
+﻿@model EndocrinRegistr.Models.CaseRecord
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@*<h1>Details</h1>
+
+<div>
+    <h4>CaseRecord</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Diag)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Diag.NameDiag)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Doctors)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Doctors.Doctor)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Fio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fio)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateBirth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateBirth)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sex)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sex)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Contacts)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Contacts)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Adds)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Adds)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Job)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Job)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CompDiag)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompDiag)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumCase)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumCase)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DetectCaseY)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DetectCaseY)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DetectFormationY)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DetectFormationY)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DetectDetails)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DetectDetails)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Complaints)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Complaints)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Obesity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Obesity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DisorderCarbo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DisorderCarbo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArterHypert)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArterHypert)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DisorderPcm)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DisorderPcm)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Visual)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Visual)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Igh)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Igh)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Operation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Operation)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Postoper)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Postoper)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SvzkNpvaA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SvzkNpvaA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SvzkPnvA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SvzkPnvA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SvzkLnvA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SvzkLnvA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SvzkNpvbA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SvzkNpvbA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SvzkNpvaK)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SvzkNpvaK)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SvzkPnvK)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SvzkPnvK)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SvzkLnvK)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SvzkLnvK)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SvzkNpvbK)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SvzkNpvbK)
+        </dd>
+    </dl>
+</div>*@
+
+<div class="row">
+    <div class="col-md-12">
+            <fieldset class="border p-2 pl-2 pb-0 mb-4">
+                <legend>Данные пациента:</legend>
+                <div class="row">
+                    <dl class="col-sm-5">
+                        <dt>@Html.DisplayNameFor(model => model.Fio)</dt>
+                        <dd>@Html.DisplayFor(model => model.Fio)</dd>
+                    </dl>
+                    <dl class="col-sm-3">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DateBirth)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.DateBirth)
+                        </dd>
+                    </dl>
+                    <dl class="col-sm-3">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Sex)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Sex)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="row">
+                    <dl class="col-sm-4">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Contacts)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Contacts)
+                        </dd>
+                    </dl>
+                    <dl class="col-sm-4">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Adds)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Adds)
+                        </dd>
+                    </dl>
+                    <dl class="col-sm-4">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Job)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Job)
+                        </dd>
+                    </dl>
+                </div>
+            </fieldset>
+            <div class="row">
+                <dl class="col-sm-4">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Doctors)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Doctors.Doctor)
+                    </dd>
+                </dl>
+                <dl class="col-sm-2">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NumCase)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NumCase)
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="row">
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DetectCaseY)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DetectCaseY)
+                    </dd>
+                </dl>
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DetectFormationY)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DetectFormationY)
+                    </dd>
+                </dl>
+                <dl class="col-sm-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DetectDetails)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DetectDetails)
+                    </dd>
+                </dl>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <dl>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Diag)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Diag.NameDiag)
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CompDiag)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.CompDiag)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-sm-6">
+                    <dl>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Complaints)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Complaints)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Obesity)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Obesity)
+                    </dd>
+                </dl>
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DisorderCarbo)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DisorderCarbo)
+                    </dd>
+                </dl>
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ArterHypert)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ArterHypert)
+                    </dd>
+                </dl>
+                <dl class="col-sm-3">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DisorderPcm)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DisorderPcm)
+                    </dd>
+                </dl>
+            </div>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Visual)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Visual)
+                </dd>
+            </dl>
+            <div>
+
+
+                <div id="labCase">
+                    <input type="hidden" id="labCaseId" value="0" />
+                    <table class="table table-condensed table-striped table-bordered text-center table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th style="white-space: nowrap; width: 1%;">
+                                    Лабораторное исследование
+                                </th>
+                                <th style="white-space: nowrap; width: 1%;">
+                                    Год исследования
+                                </th>
+                                <th>
+                                    Комментарий
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </div>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Igh)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Igh)
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Operation)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Operation)
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Postoper)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Postoper)
+                </dd>
+            </dl>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>СВЗК</th>
+                        <th>Место забора крови</th>
+                        <th>Альдостерон пг/мл</th>
+                        <th>Кортизол нмоль/л</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Нижняя полая вена ниже почечных вен (НПВ(а))</td>
+                        <td>
+                            @Html.DisplayFor(model => model.SvzkNpvaA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.SvzkNpvaK)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Правая надпочечная вена (ПНВ)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.SvzkPnvA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.SvzkPnvK)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Левая надпочечная вена (ЛНВ)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.SvzkLnvA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.SvzkLnvK)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Нижняя полая вена выше почечных вен (НПВ(б))</td>
+                        <td>
+                            @Html.DisplayFor(model => model.SvzkNpvbA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.SvzkNpvbK)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script>
+            let row = function (labCase) {
+        return "<tr data-rowid='" + labCase.labCaseId + "'>" +
+            "<td>" + labCase.lab.labName + "</td>" +
+            "<td>" + labCase.detectYear + "</td>" +
+            "<td>" + labCase.comment + "</td>" +
+            "</tr>";
+    }
+    function GetLabCases(caseRdId) {
+        $.ajax({
+            url: "/api/APILabCases?caseRecordId=" + caseRdId,
+            type: "GET",
+            contentType: "applicattion/json",
+            data: JSON.stringify({
+                caseRecordId: caseRdId
+            }),
+            success: function (labCases) {
+                let rows = "";
+                $.each(labCases, function (index, labCase) {
+                    rows += row(labCase);
+                })
+                $("#labCase table tbody").append(rows);
+            }
+        });
+    }
+
+    GetLabCases(@Model.CaseRecordId);
+
+
+
+        //$("#caseEdit").submit(function (e) {
+        //    e.preventDefault();
+        //    alert(parseFloat($("td#SvzkLnvAt")[0].textContent));
+        //    $("input#SvzkLnvA")[0].value = parseFloat($("td#SvzkLnvAt")[0].textContent);
+        //    this.submit();
+        //});
+        //$(document).ready (function () {
+        //    $("td#SvzkLnvAt")[0].textContent = $("input#SvzkLnvA")[0].value;
+        //});
+
+        // переопределение валидации на стороне клиента
+        //$.validator.methods.range = function (value, element, param) {
+        //    var globalizedValue = value.replace(",", ".");
+        //    return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+        //}
+
+        //$.validator.methods.number = function (value, element) {
+        //    return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+        //}
+    </script>
+    }
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.CaseRecordId">Edit</a> |
+        @*<a asp-action="Index">Back to List</a>*@
+    </div>

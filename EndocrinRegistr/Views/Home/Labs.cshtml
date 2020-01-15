@@ -1,0 +1,176 @@
+﻿@{
+    ViewData["Title"] = "Labs";
+}
+
+<h1>Лабораторные исследования</h1>
+
+<form name="labForm" id="labForm">
+    <input type="hidden" name="id" value="0" />
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="text" id="name" size="50" class="form-control m-2" name="name" placeholder="Введите лаборатрное исследование..." />
+        </div>
+        <div class="form-group m-2">
+            <a id="save" class="btn btn-sm btn-primary m-1 text-white">Добавить</a>
+            <a id="reset" hidden class="btn btn-sm btn-primary m-1 text-white">Отменить</a>
+        </div>
+    </div>
+</form>
+<br />
+<div id="objTable">
+    <table class="table table-condensed table-striped">
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+
+<script>
+    // Получение всех
+    function GetLabs() {
+        $.ajax({
+            url: '/api/APILabs',
+            type: 'GET',
+            contentType: "application/json",
+            success: function (objs) {
+                let rows = "";
+                $.each(objs, function (index, obj) {
+                    // добавляем полученные элементы в таблицу
+                    rows += row(obj);
+                })
+                $("#objTable table tbody").append(rows);
+            }
+        });
+    }
+    // Получение одного
+    function GetLab(idObj) {
+        $.ajax({
+            url: '/api/APILabs/' + idObj,
+            type: 'GET',
+            contentType: "application/json",
+            success: function (obj) {
+                let form = document.forms["labForm"];
+                form.elements["id"].value = obj.labId;
+                form.elements["name"].value = obj.labName;
+                document.getElementById('save').innerText = "Сохранить";
+                document.getElementById('reset').hidden = false;
+            }
+        });
+    }
+    // Добавление
+    function CreateLab(nameObj) {
+        $.ajax({
+            url: "/api/APILabs",
+            contentType: "application/json",
+
+            method: "POST",
+            data: JSON.stringify({
+                labName: nameObj
+            }),
+            success: function (obj) {
+                reset();
+                $("#objTable table tbody").append(row(obj));
+            }
+        })
+    }
+    // Изменение
+    function EditLab(idObj, nameObj) {
+
+        $.ajax({
+            url: "/api/APILabs/" + idObj,
+            contentType: "application/json",
+            method: "PUT",
+            data: JSON.stringify({
+                labId: parseInt(idObj, 10),
+                labName: nameObj
+            }),
+            success: function (obj) {
+                reset();
+                $("#objTable tr[data-rowid='" + obj.labId + "']").replaceWith(row(obj));
+            }
+        })
+    }
+
+    // сброс формы
+    function reset() {
+        let form = document.forms["labForm"];
+        form.reset();
+        document.getElementById('save').innerText = "Добавить"
+        document.getElementById('reset').hidden = true;
+        form.elements["id"].value = 0;
+    }
+
+    // Псевдо удаление
+    function DeleteLab(idObj) {
+        $.ajax({
+            url: "/api/APILabs/" + idObj,
+            contentType: "application/json",
+            method: "PUT",
+            data: JSON.stringify({
+                labId: parseInt(idObj, 10),
+                labName: "deleted",
+                deleted: true
+            }),
+            success: function (obj) {
+                $("#objTable tr[data-rowid='" + obj.labId + "']").remove();
+                reset();
+            }
+        })
+    }
+
+    // создание строки для таблицы
+    let row = function (obj) {
+        return "<tr data-rowid='" + obj.labId + "'>" +
+            "<td>" + obj.labName + "</td>" +
+            "<td><a class='editLink btn btn-sm btn-primary text-white' data-id='" + obj.labId + "'>Изменить</a> | " +
+            "<a class='removeLink btn btn-sm btn-primary text-white' data-id='" + obj.labId + "'>Удалить</a></td></tr>";
+    }
+    // сброс значений формы
+    $("#reset").click(function (e) {
+
+        e.preventDefault();
+        reset();
+    })
+
+    // отправка формы
+    $("#save").click(function (e) {
+        e.preventDefault();
+        let form = document.forms["labForm"];
+        let id = form.elements["id"].value;
+        let name = form.elements["name"].value;
+        if (id == 0)
+            CreateLab(name);
+        else
+            EditLab(id, name);
+    });
+
+    // нажимаем на ссылку Изменить
+    $("body").on("click", ".editLink", function () {
+        let id = $(this).data("id");
+        GetLab(id);
+    })
+    // нажимаем на ссылку Удалить
+    $("body").on("click", ".removeLink", function () {
+        let isConfirm = confirm("Подтвердите удаление");
+        if (isConfirm) {
+            let idObj = $(this).data("id");
+            DeleteLab(idObj);
+        }
+    })
+    $('#labForm').on('keyup keypress', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    $("#name").keydown(function (event) {
+        this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+    });
+
+    // загрузка
+    GetLabs();
+
+</script>
